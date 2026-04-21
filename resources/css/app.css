@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* bisa taruh di app.css atau dalam <style> blade */
+.slug-badge {
+    max-width: 120px; /* jaga agar tidak kepanjangan */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 4px 10px;
+    background: #eef2ff;
+}
