@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+{
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('slug')->unique();
+
+        // Kunci asing ke tabel categories
+        $table->foreignId('category_id')
+              ->constrained() // merujuk ke 'id' di tabel 'categories'
+              ->onDelete('cascade'); // Jika kategori dihapus, produknya ikut terhapus
+
+        $table->text('description')->nullable();
+        $table->bigInteger('price'); // Simpan harga sebagai integer (cth: 50000)
+        $table->string('image')->nullable(); // Path ke file gambar
+        $table->timestamps();
+    });
+}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};
